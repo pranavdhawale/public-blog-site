@@ -1,0 +1,19 @@
+{
+  "name": "public-blog-site",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pranavdhawale/public-blog-site.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pranavdhawale/public-blog-site/issues"
+  },
+  "homepage": "https://github.com/pranavdhawale/public-blog-site#readme"
+}
