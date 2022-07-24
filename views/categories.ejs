@@ -1,0 +1,96 @@
+<style>
+.hashTag{
+border: 1px solid #32548f; 
+margin: 2vh; 
+padding: 2vh;
+font-weight: 800;
+border-radius: 20px;
+}
+
+
+
+.hashTag:hover {
+  background-color: var(--secondary-background-color);
+  transition: 0.8s;
+}
+/* 
+@keyframes change-color {
+  0% {
+    background-color: #CAF4F4;
+  }
+  25%{
+      background-color: #CAEFD1;
+  }
+  50% {
+    background-color: #FDE0D9;
+  }
+  75%{
+      background-color: #FCFFE9;
+  }
+} */
+
+
+</style>
+
+<%- include("partials/header") %>
+
+<!-- Popular tags -->
+<section class="popular-tags section" style="padding-top: 10rem">
+
+    <div class="container">
+
+        <h2 class="title section-title" data-name="Categories">Categories</h2>
+
+        <div class="popular-tags-container d-grid">
+
+            <a href="#" class="article">
+                <span class="tag-name">#Travel</span>
+                <img src=" /images/tags/travel-tag.jpg" alt="" class="article-image">
+            </a>
+
+            <a href="#" class="article">
+                <span class="tag-name">#Food</span>
+                <img src=" /images/tags/food-tag.jpg" alt="" class="article-image">
+            </a>
+
+            <a href="#" class="article">
+                <span class="tag-name">#Technology</span>
+                <img src=" /images/tags/technology-tag.jpg" alt="" class="article-image">
+            </a>
+
+            <a href="#" class="article">
+                <span class="tag-name">#Health</span>
+                <img src=" /images/tags/health-tag.jpg" alt="" class="article-image">
+            </a>
+
+            <a href="#" class="article">
+                <span class="tag-name">#Nature</span>
+                <img src=" /images/tags/nature-tag.jpg" alt="" class="article-image">
+            </a>
+
+            <a href="#" class="article">
+                <span class="tag-name">#Fitness</span>
+                <img src=" /images/tags/fitness-tag.jpg" alt="" class="article-image">
+            </a>
+
+        </div>
+
+    </div>
+</section>
+
+
+    <section class="section" >
+        <div class="container">
+            <h2 class="title section-title" data-name="Tags">Tags</h2>
+            <% category.forEach(function (category) { %>
+                <span class="hashTag">
+                    #<%= category %>
+                </span >
+                <% }) %>
+
+                <!-- <img src=" /images/tags/fitness-tag.jpg" alt="" class="article-image"> --> 
+        </div>
+    </section>
+
+
+    <%- include("partials/footer") %>

@@ -1,0 +1,172 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alpha Blogs</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon.png">
+    <!-- Remix icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <!-- Bootstrap CDN -->
+    
+<!-- Swiper.js styles -->
+<link rel="stylesheet" href="../../public/css/swiper-bundle.min.css" />
+<!-- Custom styles -->
+<link rel="stylesheet" href="../../public/css/main.css">
+ 
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+
+        <nav class="navbar container">
+            <a href="./index.html">
+                <h2 class="logo">Alpha-Blogs</h2>
+            </a>
+
+            <div class="menu" id="menu">
+                <ul class="list">
+                    <li class="list-item">
+                        <a href="/" class="list-link current">Home</a>
+                    </li>
+                    <li class="list-item">
+                        <a href="/categories" class="list-link">Categories</a>
+                    </li>
+                    <li class="list-item">
+                        <a href="/reviews" class="list-link">Reviews</a>
+                    </li>
+                    <li class="list-item">
+                        <a href="/blogs" class="list-link">Blogs</a>
+                    </li>
+                    <li class="list-item">
+                        <a href="/compose" class="list-link">Compose</a>
+                    </li>
+                    <li class="list-item">
+                        <a href="/contact" class="list-link">Contact</a>
+                    </li>
+                    <li class="list-item screen-lg-hidden">
+                        <a href="#" class="list-link">Sign in</a>
+                    </li>
+                    <li class="list-item screen-lg-hidden">
+                        <a href="#" class="list-link">Sign up</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="list list-right">
+                <button class="btn place-items-center" id="theme-toggle-btn">
+                    <i class="ri-sun-line sun-icon"></i>
+                    <i class="ri-moon-line moon-icon"></i>
+                </button>
+
+                <button class="btn place-items-center" id="search-icon">
+                    <i class="ri-search-line"></i>
+                </button>
+
+                <button class="btn place-items-center screen-lg-hidden menu-toggle-icon" id="menu-toggle-icon">
+                    <i class="ri-menu-3-line open-menu-icon"></i>
+                    <i class="ri-close-line close-menu-icon"></i>
+                </button>
+
+                <a href="/signin" class="list-link screen-sm-hidden">Sign in</a>
+                <a href="#" class="btn sign-up-btn fancy-border screen-sm-hidden">
+                    <span>Sign up</span>
+                </a>
+            </div>
+
+        </nav>
+
+    </header>
+
+    <!-- Search -->
+    <div class="search-form-container container" id="search-form-container">
+
+        <div class="form-container-inner">
+
+            <form action="" class="form">
+                <input class="form-input" type="text" placeholder="What are you looking for?">
+                <button class="btn form-btn" type="submit">
+                    <i class="ri-search-line"></i>
+                </button>
+            </form>
+            <span class="form-note">Or press ESC to close.</span>
+
+        </div>
+
+        <button class="btn form-close-btn place-items-center" id="form-close-btn">
+            <i class="ri-close-line"></i>
+        </button>
+
+    </div>
+    
+    <script>
+        // Grab elements
+            const selectElement = (selector) => {
+                const element = document.querySelector(selector);
+                if (element) return element;
+                throw new Error(`Something went wrong! Make sure that ${selector} exists/is typed correctly.`);
+            };
+
+            //Nav styles on scroll
+            const scrollHeader = () => {
+                const navbarElement = selectElement('#header');
+                if (this.scrollY >= 15) {
+                    navbarElement.classList.add('activated');
+                } else {
+                    navbarElement.classList.remove('activated');
+                }
+            }
+
+            window.addEventListener('scroll', scrollHeader);
+
+            // Open menu & search pop-up
+            const menuToggleIcon = selectElement('#menu-toggle-icon');
+            const formOpenBtn = selectElement('#search-icon');
+            const formCloseBtn = selectElement('#form-close-btn');
+            const searchContainer = selectElement('#search-form-container');
+
+            const toggleMenu = () => {
+                const mobileMenu = selectElement('#menu');
+                mobileMenu.classList.toggle('activated');
+                menuToggleIcon.classList.toggle('activated');
+            }
+
+            menuToggleIcon.addEventListener('click', toggleMenu);
+
+            // Open/Close search form popup
+            formOpenBtn.addEventListener('click', () => searchContainer.classList.add('activated'));
+            formCloseBtn.addEventListener('click', () => searchContainer.classList.remove('activated'));
+            // -- Close the search form popup on ESC keypress
+            window.addEventListener('keyup', (event) => {
+                if (event.key === 'Escape') searchContainer.classList.remove('activated');
+            });
+
+            // Switch theme/add to local storage
+            const body = document.body;
+            const themeToggleBtn = selectElement('#theme-toggle-btn');
+            const currentTheme = localStorage.getItem('currentTheme');
+
+            // Check to see if there is a theme preference in local Storage, if so add the ligt theme to the body
+            if (currentTheme) {
+                body.classList.add('light-theme');
+            }
+
+            themeToggleBtn.addEventListener('click', function () {
+                // Add light theme on click
+                body.classList.toggle('light-theme');
+
+                // If the body has the class of light theme then add it to local Storage, if not remove it
+                if (body.classList.contains('light-theme')) {
+                    localStorage.setItem('currentTheme', 'themeActive');
+                } else {
+                    localStorage.removeItem('currentTheme');
+                }
+            });
+
+       
+    </script>
+</body>
+</html>
