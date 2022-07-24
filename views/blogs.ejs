@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alpha Blogs</title>
+</head>
+<style>
+.data{
+    border: 2px solid var(--secondary-background-color);
+    padding: 3vh;
+    margin: 3vh;
+    background-color:var(--secondary-background-color);
+    /* color: var(--secondary-background-color); */
+    color: var(--light-color);
+}
+    
+.data:hover{
+    background-color: var(--hover-dark-color);
+     color: var(--hover-light-color);
+     transition: 0.7s;
+}
+
+.button {
+  background-color: rgb(136, 124, 124);
+  border: none;
+  color: var(--secondary-background-color);
+  padding: 3px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+
+
+
+</style>
+<body>
+    <%- include("partials/header") %>
+    
+        <h1>Home</h1>
+        <p>
+            <%= homeStartingContent %>
+        </p>
+
+    <!-- Older posts -->
+    <section class="older-posts section">
+    
+        <div class="container">
+    
+            <h2 class="title section-title" data-name="Blogs by developers">Blogs by developers</h2>
+    
+            <div class="older-posts-grid-wrapper d-grid">
+    
+                <a href="#" class="article d-grid">
+                    <div class="older-posts-article-image-wrapper">
+                        <img src="/images/older_posts/older_posts_1.jpg" alt="" class="article-image">
+                    </div>
+    
+                    <div class="article-data-container">
+    
+                        <div class="article-data">
+                            <span>23 Dec 2021</span>
+                            <span class="article-data-spacer"></span>
+                            <span>3 Min read</span>
+                        </div>
+    
+                        <h3 class="title article-title">Fedora36 installation guide</h3>
+                        <p class="article-description">Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                            Similique a tempore sapiente corporis, eaque fuga placeat odit voluptatibus.</p>
+    
+                    </div>
+                </a>
+    
+                <a href="#" class="article d-grid">
+                    <div class="older-posts-article-image-wrapper">
+                        <img src="/images/older_posts/older_posts_2.jpg" alt="" class="article-image">
+                    </div>
+    
+                    <div class="article-data-container">
+    
+                        <div class="article-data">
+                            <span>23 Dec 2021</span>
+                            <span class="article-data-spacer"></span>
+                            <span>3 Min read</span>
+                        </div>
+    
+                        <h3 class="title article-title">Web graphics rendering technics</h3>
+                        <p class="article-description">Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                            Similique a tempore sapiente corporis, eaque fuga placeat odit voluptatibus.</p>
+    
+                    </div>
+                </a>
+    
+                <a href="#" class="article d-grid">
+                    <div class="older-posts-article-image-wrapper">
+                        <img src="/images/older_posts/older_posts_3.jpg" alt="" class="article-image">
+                    </div>
+    
+                    <div class="article-data-container">
+    
+                        <div class="article-data">
+                            <span>23 Dec 2021</span>
+                            <span class="article-data-spacer"></span>
+                            <span>3 Min read</span>
+                        </div>
+    
+                        <h3 class="title article-title">Next.js ,the next generation javascript</h3>
+                        <p class="article-description">Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                            Similique a tempore sapiente corporis, eaque fuga placeat odit voluptatibus.</p>
+    
+                    </div>
+                </a>
+    
+                <a href="#" class="article d-grid">
+                    <div class="older-posts-article-image-wrapper">
+                        <img src="/images/older_posts/older_posts_4.jpg" alt="" class="article-image">
+                    </div>
+    
+                    <div class="article-data-container">
+    
+                        <div class="article-data">
+                            <span>23 Dec 2021</span>
+                            <span class="article-data-spacer"></span>
+                            <span>3 Min read</span>
+                        </div>
+    
+                        <h3 class="title article-title">Useful GNOME extensions</h3>
+                        <p class="article-description">Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                            Similique a tempore sapiente corporis, eaque fuga placeat odit voluptatibus.</p>
+    
+                    </div>
+                </a>
+    
+                <a href="#" class="article d-grid">
+                    <div class="older-posts-article-image-wrapper">
+                        <img src="/images/older_posts/older_posts_5.jpg" alt="" class="article-image">
+                    </div>
+    
+                    <div class="article-data-container">
+    
+                        <div class="article-data">
+                            <span>23 Dec 2021</span>
+                            <span class="article-data-spacer"></span>
+                            <span>3 Min read</span>
+                        </div>
+    
+                        <h3 class="title article-title">Ethical Hacking</h3>
+                        <p class="article-description">Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                            Similique a tempore sapiente corporis, eaque fuga placeat odit voluptatibus.</p>
+    
+                    </div>
+                </a>
+    
+                <a href="#" class="article d-grid">
+                    <div class="older-posts-article-image-wrapper">
+                        <img src="/images/older_posts/older_posts_6.jpg" alt="" class="article-image">
+                    </div>
+    
+                    <div class="article-data-container">
+    
+                        <div class="article-data">
+                            <span>23 Dec 2021</span>
+                            <span class="article-data-spacer"></span>
+                            <span>3 Min read</span>
+                        </div>
+    
+                        <h3 class="title article-title">Beginner to Advance level Flutter tips</h3>
+                        <p class="article-description">Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                            Similique a tempore sapiente corporis, eaque fuga placeat odit voluptatibus.</p>
+    
+                    </div>
+                </a>
+    
+            </div>
+    
+            <!-- <div class="see-more-container">
+                <a href="#" class="btn see-more-btn place-items-center">See more <i
+                        class="ri-arrow-right-s-line"></i></i></a>
+            </div> -->
+    
+        </div>
+    
+    </section>
+      
+        
+<section class="section">
+    <div class="container">
+        <h2 class="title section-title" data-name="Blogs by Users">Blogs by Users</h2>
+
+     <% posts.forEach(function (post) { %>
+        <div class="data">
+            
+            <h1 class="articlle-title" style="margin: 2vh;">
+                <%= post.title %>
+            </h1>
+            <div class="article-data">
+                <span>   <%= post.date %> </span>
+                <span class="article-data-spacer"></span>
+                <span><%= post.time %> min read</span>
+            </div>
+
+            
+            <p class="article-description">
+                <%= post.content.substring(0,200) +"..." %>       
+                <a class="button" href="<%= " /posts/"+post.title %>">Read more</a> </p>
+     
+            
+        </div>
+            <% }) %>
+
+        
+    </div>
+</section>
+
+
+             
+
+
+<%- include("partials/footer") %>
+</body>
+
+</html>
