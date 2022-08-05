@@ -191,11 +191,11 @@
       
         
 <section class="section">
-    <div class="container">
+    <div class="container" >
         <h2 class="title section-title" data-name="Blogs by Users">Blogs by Users</h2>
 
      <% posts.forEach(function (post) { %>
-        <div class="data">
+        <div class="data" href="<%= " /posts/"+post.title %>">
             
             <h1 class="articlle-title" style="margin: 2vh;">
                 <%= post.title %>
@@ -208,7 +208,7 @@
 
             
             <p class="article-description">
-                <%= post.content.substring(0,200) +"..." %>       
+                <%- post.content.substring(0,200) +"..." %>       
                 <a class="button" href="<%= " /posts/"+post.title %>">Read more</a> </p>
      
             
