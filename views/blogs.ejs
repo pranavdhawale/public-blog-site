@@ -13,7 +13,6 @@
     padding: 3vh;
     margin: 3vh;
     background-color:var(--secondary-background-color);
-    /* color: var(--secondary-background-color); */
     color: var(--light-color);
 }
     
@@ -36,9 +35,6 @@
   cursor: pointer;
   border-radius: 10px;
 }
-
-
-
 
 </style>
 <body>
@@ -180,11 +176,6 @@
     
             </div>
     
-            <!-- <div class="see-more-container">
-                <a href="#" class="btn see-more-btn place-items-center">See more <i
-                        class="ri-arrow-right-s-line"></i></i></a>
-            </div> -->
-    
         </div>
     
     </section>
@@ -203,19 +194,16 @@
             <div class="article-data">
                 <span>   <%= post.date %> </span>
                 <span class="article-data-spacer"></span>
-                <span><%= post.time %> min read</span>
+                <span><%= //post.time %> min read</span>
             </div>
 
-            
             <p class="article-description">
                 <%- post.content.substring(0,200) +"..." %>       
-                <a class="button" href="<%= " /posts/"+post.title %>">Read more</a> </p>
+                <a class="button" href="<%= " /post/"+post._id %>">Read more</a> </p>
      
-            
         </div>
             <% }) %>
 
-        
     </div>
 </section>
 

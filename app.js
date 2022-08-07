@@ -2,19 +2,22 @@
 
 const express = require("express");
 const bodyParser = require("body-parser");
-require('dotenv').config();
-const port = process.env.PORT || 3000;
-
 const ejs = require("ejs");
 const res = require("express/lib/response");
 const _ = require("lodash");
+const mongoose = require("mongoose");
 
-const homeStartingContent = "Hey! Welcome to our Public Blogging Website. This is just A sample of a simple blogging website.";
-// const aboutContent = "This is Public Blogging website that we've developing as major project. Technologies used in this website : Node.js, Express.js, Body-Parser, Lodash and EJS Templating.";
-// const contactContent = "Scelerisque eleifend donec pretium vulputate sapien. Rhoncus urna neque viverra justo nec ultrices. Arcu dui vivamus arcu felis bibendum. Consectetur adipiscing elit duis tristique. Risus viverra adipiscing at in tellus integer feugiat. Sapien nec sagittis aliquam malesuada bibendum arcu vitae. Consequat interdum varius sit amet mattis. Iaculis nunc sed augue lacus. Interdum posuere lorem ipsum dolor sit amet consectetur adipiscing elit. Pulvinar elementum integer enim neque. Ultrices gravida dictum fusce ut placerat orci nulla. Mauris in aliquam sem fringilla ut morbi tincidunt. Tortor posuere ac ut consequat semper viverra nam libero.";
+require('dotenv').config();
+const port = process.env.PORT || 3000;
 
 const app = express();
 
+app.set('view engine', 'ejs');
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static("public"));
+
+// Authentication using Auth0
 const { auth,requiresAuth } = require('express-openid-connect');
 
 const config = {
@@ -26,47 +29,42 @@ const config = {
   issuerBaseURL: process.env.ISSUER_BASE_URL
 };
 
-// auth router attaches /login, /logout, and /callback routes to the baseURL
 app.use(auth(config));
 
-// req.isAuthenticated is provided from the auth router
+// Connection with mongodb database
+mongoose.connect("mongodb://localhost:27017/blogDB", { useNewUrlParser: true });
+
+const postSchema = {
+  title: String,
+  content: String
+};
+
+const Post = mongoose.model("Post", postSchema);
+
+const homeStartingContent = "Hey! Welcome to our Public Blogging Website. This is just A sample of a simple blogging website.";
+
+let category = [];
+let hashTag;
+let todaysDate;
+
+const date = new Date();
+todaysDate = date.toDateString()
+
+app.get("/", (req, res) => {
+  res.render("index");
+})
+
 app.get('/compose', (req, res) => {
   res.send(req.oidc.isAuthenticated() ? res.render('compose') : res.redirect("/login"));
 });
 
-app.get('/profile',requiresAuth(),(req,res)=>{
+app.get('/profile', requiresAuth(), (req, res) => {
   res.send(JSON.stringify(req.oidc.user))
 })
 
 app.post('/addCategory', (req, res) => {
   res.send(req.oidc.isAuthenticated() ? res.redirect('/addCategory') : res.redirect("/login"));
 });
-
-app.set('view engine', 'ejs');
-
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static("public"));
-
-var posts = [];
-var post;
-var postT;
-var serchFound;
-var category = [];
-var hashTag;
-var todaysDate;
-
-const date = new Date();
-todaysDate = date.toDateString()
-
-
-
-app.get("/", (req, res) => {
-  res.render("index");
-})
-
-// app.get("/signin", (req, res) => {
-//   res.send("Sign in working... Authentication with Auth0 required")
-// })
 
 app.get("/categories", (req, res) => {
   category = ["Education", "Fashion", "Art", "Photography", "Fun", "Information", "Music"]
@@ -75,7 +73,13 @@ app.get("/categories", (req, res) => {
 })
 
 app.get("/blogs", (req, res) => {
-  res.render("blogs", { homeStartingContent: homeStartingContent, posts: posts, postT: postT });
+
+  Post.find({}, function (err, posts) {
+    res.render("blogs", {
+      homeStartingContent: homeStartingContent,
+      posts: posts
+    });
+  })
 })
 
 app.get("/about", (req, res) => {
@@ -83,8 +87,6 @@ app.get("/about", (req, res) => {
 });
 
 app.get("/contact", (req, res) => {
-  // res.render("contact",{contactContent:contactContent});
-  //res.sendFile(__dirname+"/views/contact-us.html")
   res.render("contact", { homeStartingContent: homeStartingContent });
 });
 
@@ -107,41 +109,29 @@ app.post("/addCategory", (req, res) => {
 
 app.post("/compose", (req, res) => {
 
-  post = {
+  const post = new Post({
     title: req.body.postTitle,
-    date: todaysDate,
-    time: req.body.readTime,
     content: req.body.postBody
-  };
-  posts.push(post);
-
-  posts.forEach((post) => {
-    // console.log(post.title);
-    postT = post.title;
   });
 
-  res.redirect("/blogs");
-});
-
-app.get("/posts/:postName", (req, res) => {
-  const requestedTitle = _.lowerCase(req.params.postName);
-
-  posts.forEach((post) => {
-    const storedTitle = _.lowerCase(post.title);
-
-    if (storedTitle === requestedTitle) {
-      res.render("post", {
-        title: post.title,
-        content: post.content,
-        date: todaysDate,
-        time: post.time
-      }
-      )
+  post.save(err=> {
+    if (!err) {
+      res.redirect("/blogs");
     }
-  })
+  });
 });
 
+app.get("/post/:postId", (req, res) => {
+  const requestedPostId = req.params.postId;
 
+  Post.findOne({ _id: requestedPostId }, function (err, post) {
+
+    res.render("post", {
+      title: post.title,
+      content: post.content
+    });
+  });
+});
 
 app.listen(port, () => {
   console.log("Server started on port " + port);
