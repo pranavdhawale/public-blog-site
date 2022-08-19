@@ -8,7 +8,7 @@
     <title>Alpha Blogs</title>
 </head>
 <style>
-.data{
+.blogs-data{
     border: 2px solid var(--secondary-background-color);
     padding: 3vh;
     margin: 3vh;
@@ -16,13 +16,13 @@
     color: var(--light-color);
 }
     
-.data:hover{
+.blogs-data:hover{
     background-color: var(--hover-dark-color);
      color: var(--hover-light-color);
      transition: 0.7s;
 }
 
-.button {
+.blogs-button {
   background-color: rgb(136, 124, 124);
   border: none;
   color: var(--secondary-background-color);
@@ -39,14 +39,9 @@
 </style>
 <body>
     <%- include("partials/header") %>
-    
-        <h1>Home</h1>
-        <p>
-            <%= homeStartingContent %>
-        </p>
 
     <!-- Older posts -->
-    <section class="older-posts section">
+    <section class="older-posts section" style="margin-top: 7vh;">
     
         <div class="container">
     
@@ -54,7 +49,7 @@
     
             <div class="older-posts-grid-wrapper d-grid">
     
-                <a href="#" class="article d-grid">
+                <a href="/posts/post9" class="article d-grid">
                     <div class="older-posts-article-image-wrapper">
                         <img src="/images/older_posts/older_posts_1.jpg" alt="" class="article-image">
                     </div>
@@ -74,7 +69,7 @@
                     </div>
                 </a>
     
-                <a href="#" class="article d-grid">
+                <a href="/posts/post10" class="article d-grid">
                     <div class="older-posts-article-image-wrapper">
                         <img src="/images/older_posts/older_posts_2.jpg" alt="" class="article-image">
                     </div>
@@ -94,7 +89,7 @@
                     </div>
                 </a>
     
-                <a href="#" class="article d-grid">
+                <a href="/posts/post11" class="article d-grid">
                     <div class="older-posts-article-image-wrapper">
                         <img src="/images/older_posts/older_posts_3.jpg" alt="" class="article-image">
                     </div>
@@ -114,7 +109,7 @@
                     </div>
                 </a>
     
-                <a href="#" class="article d-grid">
+                <a href="/posts/post12" class="article d-grid">
                     <div class="older-posts-article-image-wrapper">
                         <img src="/images/older_posts/older_posts_4.jpg" alt="" class="article-image">
                     </div>
@@ -134,7 +129,7 @@
                     </div>
                 </a>
     
-                <a href="#" class="article d-grid">
+                <a href="/posts/post13" class="article d-grid">
                     <div class="older-posts-article-image-wrapper">
                         <img src="/images/older_posts/older_posts_5.jpg" alt="" class="article-image">
                     </div>
@@ -154,7 +149,7 @@
                     </div>
                 </a>
     
-                <a href="#" class="article d-grid">
+                <a href="/posts/post14" class="article d-grid">
                     <div class="older-posts-article-image-wrapper">
                         <img src="/images/older_posts/older_posts_6.jpg" alt="" class="article-image">
                     </div>
@@ -186,22 +181,25 @@
         <h2 class="title section-title" data-name="Blogs by Users">Blogs by Users</h2>
 
      <% posts.forEach(function (post) { %>
-        <div class="data" href="<%= " /posts/"+post.title %>">
-            
-            <h1 class="articlle-title" style="margin: 2vh;">
-                <%= post.title %>
-            </h1>
-            <div class="article-data">
-                <span>   <%= post.date %> </span>
-                <span class="article-data-spacer"></span>
-                <span><%= //post.time %> min read</span>
-            </div>
+        <a href="<%= " /post/"+post._id %>">
+            <div class="blogs-data">
+                
+                <h1 class="articlle-title" style="margin: 2vh;">
+                    <%= post.title %>
+                </h1>
+                <div class="article-data">
+                    <span>   <%= post.date %> </span>
+                    <span class="article-data-spacer"></span>
+                    <span><%= post.time %> min read</span>
+                </div>
 
-            <p class="article-description">
-                <%- post.content.substring(0,200) +"..." %>       
-                <a class="button" href="<%= " /post/"+post._id %>">Read more</a> </p>
-     
-        </div>
+                <p class="article-description">
+                    <%- post.content.substring(0,200) +"..." %>           
+                    <a class="blogs-button" href="<%= " /post/"+post._id %>">Read more</a> </p>
+        
+            </div>
+        </a>
+        
             <% }) %>
 
     </div>

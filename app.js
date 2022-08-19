@@ -3,9 +3,10 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
-const res = require("express/lib/response");
 const _ = require("lodash");
 const mongoose = require("mongoose");
+const blogx = require("./views/blogs.js");
+
 
 require('dotenv').config();
 const port = process.env.PORT || 3000;
@@ -36,12 +37,12 @@ mongoose.connect("mongodb://localhost:27017/blogDB", { useNewUrlParser: true });
 
 const postSchema = {
   title: String,
+  date : String,
+  time : Number,
   content: String
 };
 
 const Post = mongoose.model("Post", postSchema);
-
-const homeStartingContent = "Hey! Welcome to our Public Blogging Website. This is just A sample of a simple blogging website.";
 
 let category = [];
 let hashTag;
@@ -50,20 +51,32 @@ let todaysDate;
 const date = new Date();
 todaysDate = date.toDateString()
 
+app.use('/posts', blogx)
+
 app.get("/", (req, res) => {
   res.render("index");
 })
 
-app.get('/compose', (req, res) => {
-  res.send(req.oidc.isAuthenticated() ? res.render('compose') : res.redirect("/login"));
+app.get('/compose', requiresAuth(), (req, res) => {
+  res.send(res.render('compose'));
 });
 
 app.get('/profile', requiresAuth(), (req, res) => {
-  res.send(JSON.stringify(req.oidc.user))
-})
+  let user = req.oidc.user;
+  // res.send(userInfo);
+  res.render('profile',
+  {image:user.picture,
+    name:user.name,
+    nickname:user.nickname,
+    email:user.email,
+    givenName:user.given_name,
+    familyName:user.family_name,
+    language:user.locale,
+    verificationStatus:user.email_verified});
+ })
 
-app.post('/addCategory', (req, res) => {
-  res.send(req.oidc.isAuthenticated() ? res.redirect('/addCategory') : res.redirect("/login"));
+app.post('/addCategory', requiresAuth(), (req, res) => {
+  res.send( res.redirect("/login"));
 });
 
 app.get("/categories", (req, res) => {
@@ -76,7 +89,6 @@ app.get("/blogs", (req, res) => {
 
   Post.find({}, function (err, posts) {
     res.render("blogs", {
-      homeStartingContent: homeStartingContent,
       posts: posts
     });
   })
@@ -87,7 +99,7 @@ app.get("/about", (req, res) => {
 });
 
 app.get("/contact", (req, res) => {
-  res.render("contact", { homeStartingContent: homeStartingContent });
+  res.render("contact", {});
 });
 
 app.get("/compose", (req, res) => {
@@ -95,7 +107,7 @@ app.get("/compose", (req, res) => {
 })
 
 app.get("/reviews", (req, res) => {
-  res.send("reviews about alpha blogs to be added here...");
+  res.render("reviews");
 })
 
 app.post("/addCategory", (req, res) => {
@@ -109,16 +121,24 @@ app.post("/addCategory", (req, res) => {
 
 app.post("/compose", (req, res) => {
 
+  let content = req.body.postBody;
+  let readT = readTime(wordCount(content));
   const post = new Post({
     title: req.body.postTitle,
-    content: req.body.postBody
+    date:todaysDate,
+    time:readT,
+    content: content
   });
 
-  post.save(err=> {
+  if(wordCount(content)!=0){
+    post.save(err=> {
     if (!err) {
       res.redirect("/blogs");
+    }else{
+      console.log(err);
     }
   });
+}
 });
 
 app.get("/post/:postId", (req, res) => {
@@ -128,10 +148,26 @@ app.get("/post/:postId", (req, res) => {
 
     res.render("post", {
       title: post.title,
+      date: post.date,
+      time: post.time,
       content: post.content
     });
   });
 });
+
+function wordCount(str) {
+  str = str.replace(/(^\s*)|(\s*$)/gi, "");
+  str = str.replace(/[ ]{2,}/gi, " ");
+  str = str.replace(/\n /, "\n");
+  count = str.split(' ').length;
+  return count;
+}
+
+function readTime(wordCount){
+  let readT = wordCount/125;
+  readT = Math.round(readT);
+  return readT;
+}
 
 app.listen(port, () => {
   console.log("Server started on port " + port);

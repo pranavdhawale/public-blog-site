@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alpha Blogs</title>
     <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon1.png">
     <!-- Remix icons -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
     <!-- Bootstrap CDN -->
@@ -23,7 +23,7 @@
     <header class="header" id="header">
 
         <nav class="navbar container">
-            <a href="./index.html">
+            <a href="/">
                 <h2 class="logo">Alpha-Blogs</h2>
             </a>
 
@@ -48,15 +48,19 @@
                         <a href="/contact" class="list-link">Contact</a>
                     </li>
                     <li class="list-item screen-lg-hidden">
-                        <a href="#" class="list-link">Sign in</a>
+                        <a href="/logout" class="list-link">log out</a>
                     </li>
                     <li class="list-item screen-lg-hidden">
-                        <a href="#" class="list-link">Sign up</a>
+                        <a href="/login" class="list-link">Sign in</a>
                     </li>
                 </ul>
             </div>
 
             <div class="list list-right">
+                <button class="btn place-items-center" onclick="location.href='/profile'" id="user-icon">
+                    <i class="ri-user-line"></i>
+                </button>
+
                 <button class="btn place-items-center" id="theme-toggle-btn">
                     <i class="ri-sun-line sun-icon"></i>
                     <i class="ri-moon-line moon-icon"></i>

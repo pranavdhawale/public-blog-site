@@ -5,33 +5,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alpha Blogs</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-</head>
+    <link rel="shortcut icon" href="/images/favicon1.png" type="image/x-icon">
+   </head>
 <body>
     <%- include("partials/header") %>
 
-    <section class="section" style="margin-top: 10vh">
+    <section class="section" style="margin: 7vh 3vh 2vh 3vh">
         <div class="container">
-             <h1 >Compose</h1>
+             <h1>Compose</h1>
 
-    <div class="form-group">
+             <div class="container">
+                <div class="form-control">
         <form action="" method="post">
             
             <label for="postTitle">Title</label>
-            <input type="text" name="postTitle" id="postTitle" placeholder="Title Of Post" class="form-control">
+            <input required minlength="10" type="text" name="postTitle" id="postTitle" placeholder="Title Of Post" class="form-input">
 
             <label for="postBody">Post</label>
-            <textarea name="postBody" cols="30" rows="5" class="form-control" placeholder="Start Writting Here" id="postBody"></textarea>
+            <textarea required minlength="150" name="postBody" cols="30" rows="5" class="form-input" placeholder="Start Writting Here" id="postBody"></textarea>
             </div>
-            <button type="submit" class="btn btn-primary " >Publish</button>
+            <button type="submit" class="btn form-btn sign-up-btn" style="margin: 2vh;">Publish</button>
         </form>
         </div>
-    </section>
-
-   
-        
+             </div>
     
+    </section>
 
     <%- include("partials/footer") %>
 </body>
