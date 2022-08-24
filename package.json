@@ -5,7 +5,9 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "node app.js"
+    "test": "node app.js",
+    "build":"npm build",
+    "run":"node app.js"
   },
   "repository": {
     "type": "git",

@@ -33,7 +33,10 @@ const config = {
 app.use(auth(config));
 
 // Connection with mongodb database
-mongoose.connect("mongodb://localhost:27017/blogDB", { useNewUrlParser: true });
+// mongoose.connect(`mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONNGODB_PASS}@alpha-blogs.6jxbwpk.mongodb.net/?retryWrites=true&w=majority`, { useNewUrlParser: true }).then(()=>{
+mongoose.connect(`mongodb+srv://DrasticCoder:edCSZJ5evbBH605H@alpha-blogs.6jxbwpk.mongodb.net/?retryWrites=true&w=majority`, { useNewUrlParser: true }).then(()=>{
+  console.log("mongodb connected...")
+})
 
 const postSchema = {
   title: String,
@@ -63,7 +66,6 @@ app.get('/compose', requiresAuth(), (req, res) => {
 
 app.get('/profile', requiresAuth(), (req, res) => {
   let user = req.oidc.user;
-  // res.send(userInfo);
   res.render('profile',
   {image:user.picture,
     name:user.name,
