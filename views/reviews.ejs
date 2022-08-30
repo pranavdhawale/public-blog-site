@@ -4,8 +4,40 @@
 
         <section class="section" style="margin-top: 5vh;">
             <div class="container">
-                <h1>Reviews section</h1>
-                <h2>Reviews goes here...</h2>
+                
+                <section class="section">
+                    <div class="container">
+                        <h1 class="title section-title" data-name="Reviews">Reviews</h1>
+                
+                        <% posts.forEach(function (post) { %>
+                            <a href="<%= " /post/"+post._id %>">
+                                <div class="blogs-data">
+                
+                                    <h1 class="articlle-title" style="margin: 2vh;">
+                                        <%= post.title %>
+                                    </h1>
+                                    <div class="article-data">
+                                        <span>
+                                            <%= post.date %>
+                                        </span>
+                                        <span class="article-data-spacer"></span>
+                                        <span>
+                                            <%= post.time %> min read
+                                        </span>
+                                    </div>
+                
+                                    <p class="article-description">
+                                        <%- post.content.substring(0,200) +"..." %>
+                                            <a class="blogs-button" href="<%= " /post/"+post._id %>">Read more</a>
+                                    </p>
+                
+                                </div>
+                            </a>
+                
+                            <% }) %>
+                
+                    </div>
+                </section>
             </div>
         </section>
 

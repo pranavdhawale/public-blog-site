@@ -1,5 +1,3 @@
-//jshint esversion:6
-
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
@@ -109,7 +107,12 @@ app.get("/compose", (req, res) => {
 })
 
 app.get("/reviews", (req, res) => {
-  res.render("reviews");
+  Post.find({}, function (err, posts) {
+    res.render("reviews", {
+      posts: posts
+    });
+  })
+  
 })
 
 app.post("/addCategory", (req, res) => {
