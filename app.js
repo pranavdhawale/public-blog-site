@@ -59,7 +59,7 @@ app.get("/", (req, res) => {
 })
 
 app.get('/compose', requiresAuth(), (req, res) => {
-  res.send(res.render('compose'));
+  res.render('compose');
 });
 
 app.get('/profile', requiresAuth(), (req, res) => {
