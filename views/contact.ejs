@@ -2,13 +2,35 @@
 
 <body>
 
-    <section class="section" style="margin-top: 5vh;">
+    <section class="section" style="margin: 7vh 3vh 2vh 3vh">
         <div class="container">
-             <h1>Contact Us</h1>
-    <h2>Developers Information Here...</h2>
+            <h1>Contact Us</h1>
+    
+            <div class="container">
+                <div class="form-control">
+    
+                        <label for="postTitle">Subject</label>
+                        <input type="text" name="postTitle" id="postTitle"
+                            placeholder="Enter subject here" class="form-input">
+    
+                        <label for="postBody">Message</label>
+                        <textarea name="postBody" cols="30" rows="5" class="form-input"
+                            placeholder="Start Writting Here..." id="postBody"></textarea>
+                </div>
+                <button type="submit" class="btn form-btn sign-up-btn" style="margin: 2vh;" onclick="mailFunction()">Send</button>
+               
+            </div>
         </div>
+    
     </section>
    
 </body>
+
+<script>
+    function mailFunction(){
+        console.log('pressed...')
+        location.href="mailto:pranavdhawale19@gmail.com,deepbansode@duck.com?subject=Just here to say HII!&body=I stumbled here from your website - Alpha Blogs, :P"
+    }
+</script>
 
 <%- include("partials/footer") %>
