@@ -31,8 +31,7 @@ const config = {
 app.use(auth(config));
 
 // Connection with mongodb database
-// mongoose.connect(`mongodb+srv://${process.env.MONGODB_USERNAME}:${process.env.MONNGODB_PASS}@alpha-blogs.6jxbwpk.mongodb.net/?retryWrites=true&w=majority`, { useNewUrlParser: true }).then(()=>{
-mongoose.connect(`mongodb+srv://DrasticCoder:edCSZJ5evbBH605H@alpha-blogs.6jxbwpk.mongodb.net/?retryWrites=true&w=majority`, { useNewUrlParser: true }).then(()=>{
+mongoose.connect(process.env.MONGODB_REMOTE, { useNewUrlParser: true }).then(()=>{
   console.log("mongodb connected...")
 })
 
