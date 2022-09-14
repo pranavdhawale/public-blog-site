@@ -4,7 +4,8 @@ const ejs = require("ejs");
 const _ = require("lodash");
 const mongoose = require("mongoose");
 const blogx = require("./views/blogs.js");
-
+const showdown = require('showdown');
+var converter = new showdown.Converter();
 
 require('dotenv').config();
 const port = process.env.PORT || 3000;
@@ -124,14 +125,14 @@ app.post("/addCategory", (req, res) => {
 })
 
 app.post("/compose", (req, res) => {
-
   let content = req.body.postBody;
   let readT = readTime(wordCount(content));
+  let html = converter.makeHtml(content);
   const post = new Post({
     title: req.body.postTitle,
     date:todaysDate,
     time:readT,
-    content: content
+    content: html
   });
 
   if(wordCount(content)!=0){
